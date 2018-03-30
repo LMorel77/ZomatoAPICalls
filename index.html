@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Zomato API Testing</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./zomatoapp.js"></script>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+
+</head>
+
+<body>
+    <header>
+        <h1>Zomato API Get Request</h1>
+    </header>
+    <div class="wrapper">
+        <form>
+            <div>
+                <label for="city">City:</label>
+                <br>
+                <input type="text" id="city-input">
+            </div>
+            <div>
+                <label for="cuisine">Cuisine:</label>
+                <br>
+                <input type="text" id="cuisine-input">
+            </div>
+            <div>
+                <button type="submit" class="api-call">Submit</button>
+            </div>
+            <hr>
+        </form>
+        <div>
+            <h2>Results:</h2>
+        </div>
+        <div class="results" id="hits">
+        </div>
+    </div>
+
+</body>
+
+</html>
