@@ -13,84 +13,94 @@ $(document).ready(function () {
 
         var userCity = $("#city-input").val().trim().replace(/\s+/g, ''); // Remove ALL spaces
 
-        console.log("var userCity = ", userCity);
-
         $.ajax({
-            type: "GET", //it's a GET request API
+            type: "GET",
             headers: {
                 'X-Zomato-API-Key': apiKey //only allowed non-standard header
             },
-            // async: false,
-            url: citySearchURL, //what do you want
-            dataType: 'json', //wanted response data type - let jQuery handle the rest...
+            url: citySearchURL,
+            dataType: 'json',
             data: {
-                //could be directly in URL, but this is more pretty, clear and easier to edit
+                // Could also go in URL, but this is easier to edit
                 q: userCity,
             },
-            processData: true, //data is an object => tells jQuery to construct URL params from it
+            processData: true, // data is an object..tells jQuery to construct URL params
             success: function (data) {
 
                 console.log(data);
-                searchData = data;
 
-                for (let i = 0; i < data.location_suggestions.length; i++) {
+                if (data.location_suggestions.length === 0) {
+                    $("#hits").html("<p>Unable to locate specified city name. Please check your spelling and try again.</p>");
+                    return;
+                }
+                else {
 
-                    var button = $("<button>");
-                    button.text(data.location_suggestions[i].name);
-                    button.attr('id', i);
-                    button.attr('class', 'buttons');
-                    $("#hits").append(button);
+                    searchData = data;
+
+                    for (let i = 0; i < data.location_suggestions.length; i++) {
+
+                        var button = $("<button>");
+                        button.text(data.location_suggestions[i].name);
+                        button.attr('id', i);
+                        button.attr('class', 'buttons cities');
+                        $("#hits").append(button);
+                    }
                 }
             }
         });
 
-        $(document).on("click", ".buttons", function (event) {
+        $(document).on("click", ".cities", function (event) {
 
             event.preventDefault();
 
             var index = $(this).attr('id');
-            console.log("var index = ", index);
             var userCityId = searchData.location_suggestions[index].id;
             var cuisine = $("#cuisine-input").val().trim().replace(/\s+/g, ''); // remove ALL spaces
-            console.log("var userCityId = ", userCityId);
-            console.log("var cuisine = ", cuisine);
 
             $.ajax({
-                type: "GET", //it's a GET request API
+                type: "GET",
                 headers: {
                     'X-Zomato-API-Key': apiKey //only allowed non-standard header
                 },
-                url: searchURL, //what do you want
-                dataType: 'json', //wanted response data type - let jQuery handle the rest...
+                url: searchURL,
+                dataType: 'json',
                 data: {
-                    //could be directly in URL, but this is more pretty, clear and easier to edit
-                    q: cuisine,  /////CHANGE THIS PART
+                    // Could also go in URL, but this is easier to edit
+                    q: cuisine,
                     city_id: userCityId,
                 },
-                processData: true, //data is an object => tells jQuery to construct URL params from it
+                processData: true, // data is an object..tells jQuery to construct URL params
                 success: function (data) {
 
                     console.log(data);
 
                     $("#hits").empty();
 
-                    for (let i = 0; i < data.restaurants.length; i++) {
+                    if (data.restaurants.length === 0) {
+                        $("#hits").html("<p>Unable to locate restaurants serving " + cuisine + ". Please check your spelling and try again, or try a different cuisine and/or city.</p>");
+                        return;
+                    }
+                    else {
 
-                        var button = $("<button>");
+                        for (let i = 0; i < data.restaurants.length; i++) {
 
-                        button.text(data.restaurants[i].restaurant.name);
-                        button.attr('id', 'rest-' + i);
-                        button.attr('class', 'venues');
-                        $("#hits").append(button);
+                            var anchor = $("<a>");
+                            var button = $("<button>");
+                            var url = data.restaurants[i].restaurant.url;
+
+                            anchor.attr("href", url).attr("target", "_blank").attr("alt", "Venue Option");
+                            anchor.append(button);
+                            button.text(data.restaurants[i].restaurant.name);
+                            button.attr('id', i).attr('class', 'buttons venues');
+
+                            $("#hits").append(anchor);
+                        }
                     }
                 }
             });
 
         });
+
     });
-
-
-
-
 
 });
