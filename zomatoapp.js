@@ -4,7 +4,6 @@ $(document).ready(function () {
     var citySearchURL = "https://developers.zomato.com/api/v2.1/cities";
     var cuisineSearchURL = "https://developers.zomato.com/api/v2.1/cuisines";
     var searchURL = "https://developers.zomato.com/api/v2.1/search";
-    // var searchURL = "https://developers.zomato.com/api/v2.1/search?entity_type=city&entity_id=3753&cuisines=55";
     var apiData;
     var cuisine;
     var cuisineId;
@@ -19,6 +18,7 @@ $(document).ready(function () {
 
         city = $("#city-input").val().trim().replace(/\s+/g, ''); // Remove ALL spaces
         cuisine = $("#cuisine-input").val().trim().replace(/\s+/g, ''); // remove ALL spaces
+
         console.log("city: " + city);
         console.log("cuisine: " + cuisine);
 
@@ -32,7 +32,7 @@ $(document).ready(function () {
             data: {
                 q: city
             },
-            processData: true, // data is an object..tells jQuery to construct URL params
+            processData: true, // Converts data to query string
             success: function (data) {
 
                 console.log("City apiData: ", data);
@@ -56,6 +56,7 @@ $(document).ready(function () {
                         $("#hits").append(button);
 
                     }
+
                 }
             }
         })
@@ -67,6 +68,7 @@ $(document).ready(function () {
 
         var index = $(this).attr('id');
         cityId = apiData.location_suggestions[index].id;
+
         console.log("index: " + index);
         console.log("cityId: ", cityId);
 
@@ -80,7 +82,7 @@ $(document).ready(function () {
             data: {
                 city_id: cityId
             },
-            processData: true, // data is an object..tells jQuery to construct URL params
+            processData: true, // Converts data to query string
             success: function (data) {
 
                 console.log("Cuisine apiData: ", data);
@@ -107,11 +109,8 @@ $(document).ready(function () {
                             console.log("cuisineId: ", cuisineId);
 
                         }
-                    }
 
-                    searchURL = "https://developers.zomato.com/api/v2.1/search?entity_type=city&entity_id=" + cityId + "&cuisines=" + cuisineId;
-                    searchURL = searchURL.toString();
-                    console.log("searchURL: ", searchURL);
+                    }
 
                     $.ajax({
                         type: "GET",
@@ -125,7 +124,7 @@ $(document).ready(function () {
                             entity_id: cityId,
                             entity_type: 'city'
                         },
-                        processData: true, // data is an object..tells jQuery to construct URL params
+                        processData: true, // Converts data to query string
                         success: function (data) {
 
                             console.log("Search apiData: ", data);
@@ -150,15 +149,16 @@ $(document).ready(function () {
                                     button.attr('id', i).attr('class', 'buttons venues');
 
                                     $("#hits").append(anchor);
+
                                 }
+
                             }
+                            
                         }
                     });
-
                 }
             }
         });
     });
-
 });
 
