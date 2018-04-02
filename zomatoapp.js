@@ -3,7 +3,7 @@ $(document).ready(function () {
     var apiKey = 'ef5b1abf524ce5d1f47b5b0f797a9d72';
     var citySearchURL = "https://developers.zomato.com/api/v2.1/cities";
     var cuisineSearchURL = "https://developers.zomato.com/api/v2.1/cuisines";
-    var searchURL = "https://developers.zomato.com/api/v2.1/search";
+    var searchURL; // = "https://developers.zomato.com/api/v2.1/search";
     var apiData;
     var cuisine;
     var cuisineId;
@@ -32,7 +32,7 @@ $(document).ready(function () {
             processData: true, // data is an object..tells jQuery to construct URL params
             success: function (data) {
 
-                console.log("City Data: ", data);
+                console.log("City apiData: ", data);
 
                 if (data.location_suggestions.length === 0) {
 
@@ -78,7 +78,7 @@ $(document).ready(function () {
             processData: true, // data is an object..tells jQuery to construct URL params
             success: function (data) {
 
-                console.log("Cuisine Data: ", data);
+                console.log("Cuisine apiData: ", data);
 
                 if (data.cuisines.length === 0) {
 
@@ -102,28 +102,34 @@ $(document).ready(function () {
 
                         }
                     }
-                    console.log("userCuisine: " + userCuisine);
-                    console.log("cuisineId: ", cuisineId);
                 }
             }
         });
+
+        searchURL = "https://developers.zomato.com/api/v2.1/search?entity_type=city&entity_id=" + cityId + "&cuisines=" + cuisine;
+        console.log("cityId: ", cityId);
+        console.log("cuisine: " + cuisine);
+        console.log("cuisineId: ", cuisineId);
+        console.log("searchURL: ", searchURL);
 
         $.ajax({
             type: "GET",
             headers: {
                 'X-Zomato-API-Key': apiKey //only allowed non-standard header
             },
-            url: searchURL,
+            url: searchURL, // "https://developers.zomato.com/api/v2.1/search?entity_type=city&entity_id=3753&cuisines=55",
             dataType: 'json',
-            data: {
-                // Could also go in URL, but this is easier to edit
-                entity_id: cityId,
-                cuisines: cuisineId
-            },
+            // data: {
+            //     // Could also go in URL, but this is easier to edit
+            //     entity_id: cityId,
+            //     entity_type: 'city',
+            //     cuisines: cuisineId,
+            //     // q: cuisine
+            // },
             processData: true, // data is an object..tells jQuery to construct URL params
             success: function (data) {
 
-                console.log("Search Data: ", data);
+                console.log("Search apiData: ", data);
 
                 $("#hits").empty();
 
