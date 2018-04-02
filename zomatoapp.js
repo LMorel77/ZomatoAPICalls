@@ -3,7 +3,8 @@ $(document).ready(function () {
     var apiKey = 'ef5b1abf524ce5d1f47b5b0f797a9d72';
     var citySearchURL = "https://developers.zomato.com/api/v2.1/cities";
     var cuisineSearchURL = "https://developers.zomato.com/api/v2.1/cuisines";
-    var searchURL; // = "https://developers.zomato.com/api/v2.1/search";
+    var searchURL = "https://developers.zomato.com/api/v2.1/search";
+    // var searchURL = "https://developers.zomato.com/api/v2.1/search?entity_type=city&entity_id=3753&cuisines=55";
     var apiData;
     var cuisine;
     var cuisineId;
@@ -18,6 +19,8 @@ $(document).ready(function () {
 
         city = $("#city-input").val().trim().replace(/\s+/g, ''); // Remove ALL spaces
         cuisine = $("#cuisine-input").val().trim().replace(/\s+/g, ''); // remove ALL spaces
+        console.log("city: " + city);
+        console.log("cuisine: " + cuisine);
 
         $.ajax({
             type: "GET",
@@ -27,7 +30,7 @@ $(document).ready(function () {
             url: citySearchURL,
             dataType: 'json',
             data: {
-                q: city,
+                q: city
             },
             processData: true, // data is an object..tells jQuery to construct URL params
             success: function (data) {
@@ -64,6 +67,8 @@ $(document).ready(function () {
 
         var index = $(this).attr('id');
         cityId = apiData.location_suggestions[index].id;
+        console.log("index: " + index);
+        console.log("cityId: ", cityId);
 
         $.ajax({
             type: "GET",
@@ -97,65 +102,62 @@ $(document).ready(function () {
 
                         if (apiCuisine === userCuisine) {
 
-                            cuisineId = data.cuisines[i].cuisine.cuisine_id + "";
+                            cuisineId = (data.cuisines[i].cuisine.cuisine_id).toString();
                             i = data.cuisines.length;
+                            console.log("cuisineId: ", cuisineId);
 
                         }
                     }
+
+                    searchURL = "https://developers.zomato.com/api/v2.1/search?entity_type=city&entity_id=" + cityId + "&cuisines=" + cuisineId;
+                    searchURL = searchURL.toString();
+                    console.log("searchURL: ", searchURL);
+
+                    $.ajax({
+                        type: "GET",
+                        headers: {
+                            'X-Zomato-API-Key': apiKey //only allowed non-standard header
+                        },
+                        url: searchURL,
+                        dataType: 'json',
+                        data: {
+                            cuisines: cuisineId,
+                            entity_id: cityId,
+                            entity_type: 'city'
+                        },
+                        processData: true, // data is an object..tells jQuery to construct URL params
+                        success: function (data) {
+
+                            console.log("Search apiData: ", data);
+
+                            $("#hits").empty();
+
+                            if (data.restaurants.length === 0) {
+                                $("#hits").html("<p>Unable to locate restaurants serving " + cuisine + ". Please check your spelling and try again, or try a different cuisine and/or city.</p>");
+                                return;
+                            }
+                            else {
+
+                                for (let i = 0; i < data.restaurants.length; i++) {
+
+                                    var anchor = $("<a>");
+                                    var button = $("<button>");
+                                    var url = data.restaurants[i].restaurant.url;
+
+                                    anchor.attr("href", url).attr("target", "_blank").attr("alt", "Venue Option");
+                                    anchor.append(button);
+                                    button.text(data.restaurants[i].restaurant.name);
+                                    button.attr('id', i).attr('class', 'buttons venues');
+
+                                    $("#hits").append(anchor);
+                                }
+                            }
+                        }
+                    });
+
                 }
             }
         });
-
-        searchURL = "https://developers.zomato.com/api/v2.1/search?entity_type=city&entity_id=" + cityId + "&cuisines=" + cuisine;
-        console.log("cityId: ", cityId);
-        console.log("cuisine: " + cuisine);
-        console.log("cuisineId: ", cuisineId);
-        console.log("searchURL: ", searchURL);
-
-        $.ajax({
-            type: "GET",
-            headers: {
-                'X-Zomato-API-Key': apiKey //only allowed non-standard header
-            },
-            url: searchURL, // "https://developers.zomato.com/api/v2.1/search?entity_type=city&entity_id=3753&cuisines=55",
-            dataType: 'json',
-            // data: {
-            //     // Could also go in URL, but this is easier to edit
-            //     entity_id: cityId,
-            //     entity_type: 'city',
-            //     cuisines: cuisineId,
-            //     // q: cuisine
-            // },
-            processData: true, // data is an object..tells jQuery to construct URL params
-            success: function (data) {
-
-                console.log("Search apiData: ", data);
-
-                $("#hits").empty();
-
-                if (data.restaurants.length === 0) {
-                    $("#hits").html("<p>Unable to locate restaurants serving " + cuisine + ". Please check your spelling and try again, or try a different cuisine and/or city.</p>");
-                    return;
-                }
-                else {
-
-                    for (let i = 0; i < data.restaurants.length; i++) {
-
-                        var anchor = $("<a>");
-                        var button = $("<button>");
-                        var url = data.restaurants[i].restaurant.url;
-
-                        anchor.attr("href", url).attr("target", "_blank").attr("alt", "Venue Option");
-                        anchor.append(button);
-                        button.text(data.restaurants[i].restaurant.name);
-                        button.attr('id', i).attr('class', 'buttons venues');
-
-                        $("#hits").append(anchor);
-                    }
-                }
-            }
-        });
-
     });
 
 });
