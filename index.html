@@ -23,42 +23,19 @@
         <div class="formWrapper">
             <form>
                 <span>zomato</span>
-                <input type="text" name="city" id="city-input" placeholder="Please enter a city...">
-                <input type="text" name="cuisine" id="cuisine-input" placeholder="Please select a cuisine...">
+                <input type="text" name="city" id="city-input" placeholder="Enter a city...">
+                <!-- <input type="text" name="cuisine" id="cuisine-input" placeholder="Please select a cuisine..."> -->
+                <select id="cuisine-input" class="input">
+                    <option value="null" selected disabled>Choose a cuisine...</option>
+                </select>
                 <button type="submit" class="api-call">Submit</button>
             </form>
         </div>
         <div class="resultsWrapper">
-            <h2>Results:</h2>
-        </div>
-        <div class="results" id="hits">
+            <h2 id="head"></h2>
+            <div class="results" id="hits"></div>
         </div>
     </div>
-
-    <!-- Original | Without Datalists -->
-    <!-- <div class="wrapper">
-        <form>
-            <div>
-                <label for="city">City:</label>
-                <br>
-                <input type="text" id="city-input">
-            </div>
-            <div>
-                <label for="cuisine">Cuisine:</label>
-                <br>
-                <input type="text" id="cuisine-input">
-            </div>
-            <div>
-                <button type="submit" class="api-call">Submit</button>
-            </div>
-            <hr>
-        </form>
-        <div>
-            <h2>Results:</h2>
-        </div>
-        <div class="results" id="hits">
-        </div>
-    </div> -->
 
     <!-- With Datalists -->
     <!-- <div class="wrapper">

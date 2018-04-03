@@ -2,6 +2,13 @@ body {
     background-color: rgb(243, 243, 243);
     font-size: 18px;
 }
+a:link, a:visited {
+    color: #cb202d;
+    text-decoration: none;
+}
+a:hover {
+    color: #D94148;
+}
 header {
     background: #cb202d;
     color: white;
@@ -9,7 +16,7 @@ header {
     font-weight: bold;
     padding: 5px 15px;
 }
-input {
+input, .input {
     border: none;
     border-radius: 5px;
     font-size: 15px;
@@ -69,14 +76,6 @@ input {
     font-weight: bold;
     padding-right: 20px;
 }
-.results {
-    background-color: white;
-    border-radius: 5px;
-    height: 200px;
-    margin: 0 auto;
-    overflow: auto;
-    width: 65%;
-}
 .resultsWrapper {
     /* background-color: #cb202d;
     border-radius: 5px; */
@@ -84,6 +83,23 @@ input {
     padding: 10px 25px;
     width: 875px;
 }
+.venues {
+    background-color: white;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+.venueName {
+    color: #cb202d;
+    font-size: 27px;
+    font-weight: bold;
+}
+.venueCity {
+    font-weight: bold;
+}
 .wrapper {
     margin: 25px 25px;
+}
+#cuisine-input {
+    display: none;
 }
