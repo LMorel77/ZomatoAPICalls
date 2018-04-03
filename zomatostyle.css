@@ -24,7 +24,7 @@ input, .input {
     padding: 12px 10px;
     width: 300px;
 }
-.api-call {
+.api-call, #resetButton {
     background-color: #cb202d;
     border: 2px solid white;
     border-radius: 5px;
@@ -36,10 +36,10 @@ input, .input {
     padding: 10px 10px;
     width: 100px;
 }
-.api-call:hover {
+.api-call:hover, #resetButton:hover {
     background:#D94148;
 }
-.api-call:active {
+.api-call:active, #resetButton:active {
     transform: translateY(4px);
 }
 .buttons {
@@ -67,7 +67,7 @@ input, .input {
     border-radius: 5px;
     margin: 0 auto;
     padding: 10px 25px;
-    width: 875px;
+    width: 960px;
 }
 .formWrapper span {
     color: white;

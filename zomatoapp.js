@@ -10,6 +10,12 @@ $(document).ready(function () {
     var city;
     var cityId;
 
+    $(document).on("click", "#resetButton", function(event) {
+        $("#cuisine-input").empty();
+        $("#city-input").empty();
+        $("#hits").empty();
+    });
+
     $(document).on("click", ".api-call", function (event) {
 
         event.preventDefault();
