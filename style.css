@@ -1,47 +1,88 @@
 body {
-    background: rgb(231,246,235);
+    background-color: rgb(243, 243, 243);
     font-size: 18px;
 }
-h2 {
-    color: rgb(195,40,55);
-}
 header {
-    background: rgb(195,40,55);
+    background: #cb202d;
     color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
     padding: 5px 15px;
 }
-hr {
-    border-width: 3px;
-    margin: 25px 0px;
-}
-input, label {
-    line-height: 2;
-    margin-bottom: 10px;
-}
-label {
-    color: rgb(195,40,55);
-    font-weight: bold;
+input {
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-right: 5px;
+    padding: 12px 10px;
+    width: 300px;
 }
 .api-call {
-    background-color: rgb(195,40,55);
+    background-color: #cb202d;
+    border: 2px solid white;
+    border-radius: 5px;
     color: white;
-    padding: 5px;
-    width: 77px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    outline: none;
+    padding: 10px 10px;
+    width: 100px;
+}
+.api-call:hover {
+    background:#D94148;
+}
+.api-call:active {
+    transform: translateY(4px);
 }
 .buttons {
-    background-color: rgb(195,40,55);
+    background-color: #cb202d;
+    border: 2px solid white;
+    border-radius: 5px;
     color: white;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
     margin-bottom: 10px;
     margin-right: 10px;
+    outline: none;
     padding: 4px;
     width: 280px;
 }
+.buttons:hover {
+    background:#D94148;
+}
+.buttons:active {
+    transform: translateY(4px);
+}
+.formWrapper {
+    background-color: #cb202d;
+    border-radius: 5px;
+    margin: 0 auto;
+    padding: 10px 25px;
+    width: 875px;
+}
+.formWrapper span {
+    color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    padding-right: 20px;
+}
 .results {
     background-color: white;
+    border-radius: 5px;
     height: 200px;
-    padding: 10px;
+    margin: 0 auto;
     overflow: auto;
-    width: 50%;
+    width: 65%;
+}
+.resultsWrapper {
+    /* background-color: #cb202d;
+    border-radius: 5px; */
+    margin: 0 auto;
+    padding: 10px 25px;
+    width: 875px;
 }
 .wrapper {
     margin: 25px 25px;

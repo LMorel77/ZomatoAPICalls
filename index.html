@@ -9,15 +9,34 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="./zomatoapp.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./style.css">
 
 </head>
 
 <body>
     <header>
-        <h1>Zomato API Get Request Form</h1>
+        <h1>zomato API Get Request Form</h1>
     </header>
+
     <div class="wrapper">
+        <div class="formWrapper">
+            <form>
+                <span>zomato</span>
+                <input type="text" name="city" id="city-input" placeholder="Please enter a city...">
+                <input type="text" name="cuisine" id="cuisine-input" placeholder="Please select a cuisine...">
+                <button type="submit" class="api-call">Submit</button>
+            </form>
+        </div>
+        <div class="resultsWrapper">
+            <h2>Results:</h2>
+        </div>
+        <div class="results" id="hits">
+        </div>
+    </div>
+
+    <!-- Original | Without Datalists -->
+    <!-- <div class="wrapper">
         <form>
             <div>
                 <label for="city">City:</label>
@@ -39,7 +58,26 @@
         </div>
         <div class="results" id="hits">
         </div>
-    </div>
+    </div> -->
+
+    <!-- With Datalists -->
+    <!-- <div class="wrapper">
+        <div class="formWrapper">
+            <form>
+                <span>zomato</span>
+                <input type="text" name="city" id="city-input" value="" list="cityList" placeholder="Please enter a city...">
+                <datalist id="cityList"></datalist>
+                <input type="text" name="cuisine" id="cuisine-input" value="" list="cuisineList" placeholder="Please select a cuisine...">
+                <datalist id="cuisineList"></datalist>
+                <button type="submit" class="api-call">Submit</button>
+            </form>
+        </div>
+        <div class="resultsWrapper">
+            <h2>Results:</h2>
+        </div>
+        <div class="results" id="hits">
+        </div>
+    </div> -->
 
 </body>
 
