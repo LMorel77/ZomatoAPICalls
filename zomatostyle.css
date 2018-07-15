@@ -1,14 +1,10 @@
+/* General Styling */
 body {
     background-color: rgb(243, 243, 243);
     font-size: 18px;
 }
-a:link, a:visited {
-    color: #cb202d;
-    text-decoration: none;
-}
-a:hover {
-    color: #D94148;
-}
+
+/* Header Styling */
 header {
     background: #cb202d;
     color: white;
@@ -16,6 +12,27 @@ header {
     font-weight: bold;
     padding: 5px 15px;
 }
+
+/* Form Styling */
+.wrapper {
+    margin: 25px 25px;
+}
+
+.formWrapper {
+    background-color: #cb202d;
+    border-radius: 5px;
+    margin: 0 auto;
+    padding: 10px 25px;
+    width: 960px;
+}
+.formWrapper span {
+    color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    padding-right: 20px;
+}
+
 input, .input {
     border: none;
     border-radius: 5px;
@@ -24,6 +41,7 @@ input, .input {
     padding: 12px 10px;
     width: 300px;
 }
+
 .api-call, #resetButton {
     background-color: #cb202d;
     border: 2px solid white;
@@ -62,44 +80,44 @@ input, .input {
 .buttons:active {
     transform: translateY(4px);
 }
-.formWrapper {
-    background-color: #cb202d;
-    border-radius: 5px;
-    margin: 0 auto;
-    padding: 10px 25px;
-    width: 960px;
+
+#cuisine-input {
+    display: none;
 }
-.formWrapper span {
-    color: white;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 28px;
-    font-weight: bold;
-    padding-right: 20px;
-}
+
+/* Restaurant List Styling */
 .resultsWrapper {
-    /* background-color: #cb202d;
-    border-radius: 5px; */
     margin: 0 auto;
     padding: 10px 25px;
     width: 875px;
 }
+
+a:link, a:visited {
+    color: #cb202d;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #D94148;
+}
+
 .venues {
     background-color: white;
     border-radius: 5px;
     margin-bottom: 20px;
     padding: 10px;
 }
+
 .venueName {
     color: #cb202d;
     font-size: 27px;
     font-weight: bold;
 }
+
 .venueCity {
     font-weight: bold;
 }
-.wrapper {
-    margin: 25px 25px;
-}
-#cuisine-input {
-    display: none;
+
+.venueCost {
+    color: teal;
 }
